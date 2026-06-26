@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sezione A – Chi sono · Francesco Pagliuca</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+  <span class="nav-brand">Francesco Pagliuca · Maturità 2026</span>
+  <div class="nav-links">
+    <a href="chi_sono.html" class="active">Chi sono</a>
+    <a href="fsl.html">FSL</a>
+  </div>
+</nav>
+<div class="hero hero-fsl">
+  <div class="container">
+    <p class="hero-eyebrow">Sezione A · Presentazione Esame di Maturità</p>
+    <h1>Francesco <em>Pagliuca</em></h1>
+    <p>Liceo Scientifico Scienze Applicate · IIS Blaise Pascal — Classe 5ªF, A.S. 2025/2026</p>
+    <div class="hero-quote">
+      <p>"Non ero la persona che sono oggi. Crescere significa imparare a parlare senza paura del giudizio."</p>
+    </div>
+  </div>
+</div>
+<div class="container">
+<section>
+    <p class="section-label">Il mio percorso scolastico</p>
+    <h2>Un percorso di crescita</h2>
+    <p style="font-size: 1rem; line-height: 1.8; color: var(--text); max-width: 680px;">
+      Sono arrivato al Pascal quasi in silenzio: pochi compagni conosciuti, la pandemia alle spalle e una timidezza che mi rendeva difficile anche solo presentarmi. Ho scelto questo istituto per la mia passione per l'informatica, ma quello che non mi aspettavo era di cambiare così profondamente come persona. Dalla seconda in poi ho iniziato a costruire amicizie vere — spesso raggiungendo gli amici in moto, l'unico mezzo che mi permetteva di non restare isolato nella mia frazione. Anno dopo anno i professori hanno imparato a conoscermi, a mettermi alla prova senza schiacciarmi, e la letteratura e la filosofia mi hanno aperto punti di vista che da solo non avrei mai cercato. Arrivo al quinto anno più sicuro, più curioso e con una qualità che sto ancora affinando: riuscire a esprimermi senza paura del giudizio degli altri.
+    </p>
+  </section>
+<section>
+    <p class="section-label">Passioni</p>
+    <h2>Cosa mi muove</h2>
+    <p class="text-muted">
+      Sono cresciuto in una piccola frazione, quasi isolato. Le mie passioni sono state — e restano — il modo in cui mi connetto al mondo: pesca, animali, informatica e moto, raccontate qui in un collage di momenti.
+    </p>
+    <div id="mosaic" class="mosaic-wrap"></div>
+  </section>
+
+  <script>
+    const photos = [
+      { src: 'images/pesca_1.jpg',   w: 750,  h: 1000 },
+      { src: 'images/acquario.jpg',  w: 1100, h: 619  },
+      { src: 'images/moto_1.jpg',    w: 750,  h: 1000 },
+      { src: 'images/lola.jpg',      w: 750,  h: 1000 },
+      { src: 'images/bass.jpg',      w: 750,  h: 1000 },
+      { src: 'images/pc.jpg',        w: 563,  h: 1000 },
+      { src: 'images/arduino.jpg',   w: 750,  h: 1000 },
+      { src: 'images/fiume.jpg',     w: 750,  h: 1000 },
+      { src: 'images/ramirezi.jpg',  w: 750,  h: 1000 },
+      { src: 'images/moto_2.jpg',    w: 750,  h: 1000 },
+      { src: 'images/salmerino.jpg', w: 750,  h: 1000 },
+      { src: 'images/salmerino2.jpg',w: 750,  h: 1000 },
+      { src: 'images/balma.jpg',     w: 750,  h: 1000 },
+    ];
+
+    function buildMosaic() {
+      const wrap = document.getElementById('mosaic');
+      wrap.innerHTML = '';
+      const totalW = wrap.clientWidth || window.innerWidth;
+      const targetH = 480;
+      const gap = 4;
+      const maxPerRow = 3;
+
+      function flushRow(items) {
+        const gaps = (items.length - 1) * gap;
+        const ratioSum = items.reduce((s, p) => s + p.w / p.h, 0);
+        const rowH = (totalW - gaps) / ratioSum;
+
+        const rowDiv = document.createElement('div');
+        rowDiv.style.cssText = 'display:flex;gap:' + gap + 'px;margin-bottom:' + gap + 'px;';
+
+        items.forEach((p) => {
+          const w = rowH * (p.w / p.h);
+          const img = document.createElement('img');
+          img.src = p.src;
+          img.alt = '';
+          img.style.cssText = 'display:block;width:' + w + 'px;height:' + rowH + 'px;object-fit:cover;flex-shrink:0;border-radius:4px;';
+          rowDiv.appendChild(img);
+        });
+
+        wrap.appendChild(rowDiv);
+      }
+
+      const rows = [];
+      let current = [], currentRatio = 0;
+
+      photos.forEach((p) => {
+        current.push(p);
+        currentRatio += p.w / p.h;
+        if (current.length >= maxPerRow || currentRatio * targetH >= totalW * 0.9) {
+          rows.push(current);
+          current = [];
+          currentRatio = 0;
+        }
+      });
+
+      if (current.length > 0) {
+        if (rows.length > 0 && current.length === 1) {
+          rows[rows.length - 1] = rows[rows.length - 1].concat(current);
+        } else {
+          rows.push(current);
+        }
+      }
+
+      rows.forEach((r) => flushRow(r));
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', buildMosaic);
+    } else {
+      buildMosaic();
+    }
+    window.addEventListener('resize', buildMosaic);
+  </script>
+<section>
+    <p class="section-label">Crescita personale</p>
+    <h2>Come sono cambiato</h2>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-icon">🗣️</div>
+        <div>
+          <div class="skill-name">Espressione senza giudizio</div>
+          <div class="skill-desc">Imparare a parlare nonostante la timidezza — ancora in corso, ma già cambiata la mia quotidianità.</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">🤝</div>
+        <div>
+          <div class="skill-name">Relazioni autentiche</div>
+          <div class="skill-desc">Costruire amicizie vere, fidarmi degli altri, imparare a farmi conoscere prima di essere giudicato.</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">📖</div>
+        <div>
+          <div class="skill-name">Apertura culturale</div>
+          <div class="skill-desc">Gli autori di italiano e filosofia mi hanno aiutato a vedere sfaccettature della vita che da solo non avrei cercato.</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">🧠</div>
+        <div>
+          <div class="skill-name">Pensiero critico</div>
+          <div class="skill-desc">Ragionare su problemi complessi — in informatica come nella vita — senza fermarmi alla risposta più immediata.</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">🔍</div>
+        <div>
+          <div class="skill-name">Curiosità applicata</div>
+          <div class="skill-desc">Andare oltre il programma, accettare le sfide proposte dai professori, cercare sempre il passo in più.</div>
+        </div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-icon">⏱️</div>
+        <div>
+          <div class="skill-name">Autonomia e metodo</div>
+          <div class="skill-desc">Organizzare il lavoro in modo sempre più indipendente, trovare la mia modalità di studio efficace.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Sezione A · Chi sono · IIS Blaise Pascal &nbsp;·&nbsp; Presentazione Esame di Maturità 2026
+</footer>
+
+</body>
+</html>
